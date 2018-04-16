@@ -21,8 +21,8 @@ while running:
         except ValueError:
             print("Sorry, I didn't understand that.")
         else:
-            # Passed the validation test
 
+            # Passed the validation test
             if search == 0:
                 city = input('Please input the city name: ')
                 if city.lower() == 'sf':
@@ -46,27 +46,23 @@ while running:
     # Stores the Json response
     json_data = requests.get(api_call).json()
 
-    # Print number of lines returned by this API call
-    # print(json_data['cnt'])
-
     location_data = {
         'city': json_data['city']['name'],
         'country': json_data['city']['country']
     }
 
-    # Prints the city, country
     print('\n{city}, {country}'.format(**location_data))
 
     # The current date we are iterating through
     current_date = ''
 
-    # Iterates through the array of dictionaries named list
+    # Iterates through the array of dictionaries named list in json_data
     for item in json_data['list']:
 
-        # Time of the weather data received partitioned into 3 hour blocks
+        # Time of the weather data received, partitioned into 3 hour blocks
         time = item['dt_txt']
 
-        # Split the time into date and hour (Ex: 2018-04-15 06:00:00)
+        # Split the time into date and hour [2018-04-15 06:00:00]
         next_date, hour = time.split(' ')
 
         # Stores the current date and prints it once
@@ -79,7 +75,7 @@ while running:
         # Grabs the first 2 integers from our HH:MM:SS string to get the hours
         hour = int(hour[:2])
 
-        # AM (ante meridiem) and PM (post meridiem)
+        # Sets the AM (ante meridiem) or PM (post meridiem) period
         if hour < 12:
             if hour == 0:
                 hour = 12
@@ -89,10 +85,10 @@ while running:
                 hour -= 12
             meridiem = 'PM'
 
-        # Prints the hours HH:MM AM/PM
+        # Prints the hours [HH:MM AM/PM]
         print('\n%i:00 %s' % (hour, meridiem))
 
-        # Temperature is measured Kelvin
+        # Temperature is measured in Kelvin
         temperature = item['main']['temp']
 
         # Weather condition
@@ -103,11 +99,11 @@ while running:
         print('Celcius: {:.2f}'.format(temperature - 273.15))
         print('Farenheit: %.2f' % (temperature * 9/5 - 459.67))
 
-    # Prints the calendar of the current month
+    # Prints a calendar of the current month
     calendar = calendar.month(int(year), int(month))
     print('\n'+ calendar)
 
-    # Asks user if he/she wants to exit
+    # Asks the user if he/she wants to exit
     while True:
         running = input('Anything else we can help you with? ')
         if running.lower() == 'yes' or running.lower() == 'y':
