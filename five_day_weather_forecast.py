@@ -61,6 +61,7 @@ while is_running:
     print("\n{city}, {country}".format(**location_data))
 
     grouped_data = defaultdict(list)
+    forecasted_days = set()
 
     # Iterates through the array of dictionaries named list in json_data
     for item in json_data["list"]:
@@ -71,9 +72,14 @@ while is_running:
         # Split the time into date and hour [YYYY-MM-DD 06:00:00]
         date, hour = time.split(' ')
 
-        # Stores the current date and prints it once
+        # Splits the YYYY-MM-DD string into separate date variables
         year, month, day = date.split('-')
+
+        # Store the date in MM/DD/YYYY format
         date = f"{month}/{day}/{year}"
+
+        # Add the day to display the forecasted days at the end
+        forecasted_days.add(day)
 
         # Grabs the first 2 characters from our HH:MM:SS string to get the hours
         hour = int(hour[:2])
@@ -108,6 +114,7 @@ while is_running:
     # Prints a calendar of the current month
     calendar_month = calendar.month(int(year), int(month))
     print('\n' + calendar_month)
+    print(f"Forecasted days: {', '.join(sorted(forecasted_days))}.")
 
     # Asks the user if he/she wants to exit
     while True:
