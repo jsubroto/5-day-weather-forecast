@@ -61,8 +61,7 @@ while is_running:
         if current_date != next_date:
             current_date = next_date
             year, month, day = current_date.split('-')
-            date = {'y': year, 'm': month, 'd': day}
-            print("\n{m}/{d}/{y}".format(**date))
+            print(f"\n{month}/{day}/{year}")
 
         # Grabs the first 2 integers from our HH:MM:SS string to get the hours
         hour = int(hour[:2])
