@@ -82,11 +82,13 @@ while is_running:
         # Temperature is measured in Kelvin
         temperature = item["main"]["temp"]
 
-        # Weather condition
-        description = item["weather"][0]["description"],
+        # Weather conditions
+        description = item["weather"][0]["description"]
+        humidity = item["main"]["humidity"]
 
         # Prints the description as well as the temperature in Celcius and Fahrenheit
         print("Weather condition: %s" % description)
+        print(f"Humidity: {humidity}%")
         print("Celcius: {:.2f}".format(temperature - 273.15))
         print("Fahrenheit: %.2f" % ((temperature - 273.15) * 9/5 + 32))
 
