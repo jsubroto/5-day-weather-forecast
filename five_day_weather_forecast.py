@@ -10,10 +10,7 @@ print("Welcome to Jaimes Subroto's 5 day weather forecast application using the 
 is_running = True
 while is_running:
 
-    # Asks the user for the city or zip code to be queried
     while True:
-
-        # Input validation
         try:
             print("\nThis application supports search by city(0) or by zip code(1).")
             search = int(input("Please input 0 or 1: "))
@@ -21,7 +18,6 @@ while is_running:
             print(invalid_input_message)
         else:
 
-            # Passed the validation test
             if search == 0:
                 city = input("Please input the city name: ")
                 if city.lower() == "sf":
@@ -61,7 +57,7 @@ while is_running:
         # Time of the weather data received, partitioned into 3 hour blocks
         time = item["dt_txt"]
 
-        # Split the time into date and hour [2018-04-15 06:00:00]
+        # Split the time into date and hour [YYYY-MM-DD 06:00:00]
         next_date, hour = time.split(' ')
 
         # Stores the current date and prints it once
