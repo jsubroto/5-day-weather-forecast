@@ -5,12 +5,10 @@ api_key = "<your_api_key>"
 api_call = "https://api.openweathermap.org/data/2.5/forecast?appid=" + api_key
 invalid_input_message = "Sorry, I didn't get that."
 
-running = True
-
 print("Welcome to Jaimes Subroto's 5 day weather forecast application using the OpenWeatherMap Weather API!")
 
-# Program loop
-while running:
+is_running = True
+while is_running:
 
     # Asks the user for the city or zip code to be queried
     while True:
@@ -106,15 +104,15 @@ while running:
 
     # Asks the user if he/she wants to exit
     while True:
-        running = input("Anything else we can help you with? ")
-        if running.lower() == "yes" or running.lower() == 'y':
+        continue_input = input("Anything else we can help you with? ")
+        if continue_input.lower() == "yes" or continue_input.lower() == 'y':
             print("Great!")
             break
-        elif running.lower() == "no" or running.lower() == 'n' or running == "exit":
+        elif continue_input.lower() == "no" or continue_input.lower() == 'n' or continue_input == "exit":
             print(
                 "Thank you for using Jaimes Subroto's 5 day weather forecast application.")
             print("Have a great day!")
-            running = False
+            is_running = False
             break
         else:
             print(invalid_input_message)
