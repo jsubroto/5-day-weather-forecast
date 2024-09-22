@@ -7,6 +7,9 @@ api_call = "https://api.openweathermap.org/data/2.5/forecast?appid=" + api_key
 invalid_input_message = "Sorry, I didn't get that."
 
 print("Welcome to Jaimes Subroto's 5 day weather forecast application using the OpenWeatherMap Weather API!")
+if api_key == "<your_api_key>":
+    print("Please provide your OpenWeatherMap API key.")
+    exit()
 
 
 def get_city_or_zip_code():
