@@ -3,6 +3,7 @@ import calendar
 
 api_key = "<your_api_key>"
 api_call = "https://api.openweathermap.org/data/2.5/forecast?appid=" + api_key
+invalid_input_message = "Sorry, I didn't get that."
 
 running = True
 
@@ -19,7 +20,7 @@ while running:
             print("\nThis application supports search by city(0) or by zip code(1).")
             search = int(input("Please input 0 or 1: "))
         except ValueError:
-            print("Sorry, I didn't understand that.")
+            print(invalid_input_message)
         else:
 
             # Passed the validation test
@@ -116,4 +117,4 @@ while running:
             running = False
             break
         else:
-            print("Sorry, I didn't get that.")
+            print(invalid_input_message)
