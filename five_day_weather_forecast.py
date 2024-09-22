@@ -7,9 +7,8 @@ invalid_input_message = "Sorry, I didn't get that."
 
 print("Welcome to Jaimes Subroto's 5 day weather forecast application using the OpenWeatherMap Weather API!")
 
-is_running = True
-while is_running:
 
+def get_city_or_zip_code():
     while True:
         try:
             print("\nThis application supports search by city(0) or by zip code(1).")
@@ -22,24 +21,22 @@ while is_running:
                 city = input("Please input the city name: ")
                 if city.lower() == "sf":
                     city = "San Francisco, US"
-
-                # Appends the city to the api call
-                api_call += "&q=" + city
-                break
+                return "&q=" + city
 
             elif search == 1:
                 zip_code = input("Please input the zip code: ")
-
-                # Appends the zip code to the api call
-                api_call += "&zip=" + zip_code
-                break
+                return "&zip=" + zip_code
 
             else:
                 # Prints the invalid number (not 0 or 1)
                 print("{} is not a valid option.".format(search))
 
+
+is_running = True
+while is_running:
+
     # Stores the Json response
-    json_data = requests.get(api_call).json()
+    json_data = requests.get(api_call + get_city_or_zip_code()).json()
 
     location_data = {
         "city": json_data["city"]["name"],
