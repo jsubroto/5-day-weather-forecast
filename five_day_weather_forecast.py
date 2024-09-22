@@ -92,8 +92,8 @@ while is_running:
         print("Farenheit: %.2f" % (temperature * 9/5 - 459.67))
 
     # Prints a calendar of the current month
-    calendar = calendar.month(int(year), int(month))
-    print('\n' + calendar)
+    calendar_month = calendar.month(int(year), int(month))
+    print('\n' + calendar_month)
 
     # Asks the user if he/she wants to exit
     while True:
