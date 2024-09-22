@@ -85,10 +85,10 @@ while is_running:
         # Weather condition
         description = item["weather"][0]["description"],
 
-        # Prints the description as well as the temperature in Celcius and Farenheit
+        # Prints the description as well as the temperature in Celcius and Fahrenheit
         print("Weather condition: %s" % description)
         print("Celcius: {:.2f}".format(temperature - 273.15))
-        print("Farenheit: %.2f" % (temperature * 9/5 - 459.67))
+        print("Fahrenheit: %.2f" % ((temperature - 273.15) * 9/5 + 32))
 
     # Prints a calendar of the current month
     calendar_month = calendar.month(int(year), int(month))
