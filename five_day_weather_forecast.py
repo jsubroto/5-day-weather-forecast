@@ -101,10 +101,10 @@ while is_running:
     # Asks the user if he/she wants to exit
     while True:
         continue_input = input("Anything else we can help you with? ")
-        if continue_input.lower() == "yes" or continue_input.lower() == 'y':
+        if continue_input.lower() in {"yes", 'y'}:
             print("Great!")
             break
-        elif continue_input.lower() == "no" or continue_input.lower() == 'n' or continue_input == "exit":
+        elif continue_input.lower() in {"no", 'n', "exit"}:
             print(
                 "Thank you for using Jaimes Subroto's 5 day weather forecast application.")
             print("Have a great day!")
