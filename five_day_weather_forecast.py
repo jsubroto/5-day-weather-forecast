@@ -6,7 +6,7 @@ api_call = "https://api.openweathermap.org/data/2.5/forecast?appid=" + api_key
 
 running = True
 
-print("Welcome to Jaimes Subroto's 5 day weather forecast application using OpenWeatherMap's API!")
+print("Welcome to Jaimes Subroto's 5 day weather forecast application using the OpenWeatherMap Weather API!")
 
 # Program loop
 while running:
@@ -16,8 +16,7 @@ while running:
 
         # Input validation
         try:
-            print(
-                "\nThis application supports search by city(0) or search by zip code(1).")
+            print("\nThis application supports search by city(0) or by zip code(1).")
             search = int(input("Please input 0 or 1: "))
         except ValueError:
             print("Sorry, I didn't understand that.")
