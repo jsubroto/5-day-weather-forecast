@@ -1,5 +1,6 @@
 import requests
 import calendar
+from collections import defaultdict
 
 api_key = "<your_api_key>"
 api_call = "https://api.openweathermap.org/data/2.5/forecast?appid=" + api_key
@@ -45,8 +46,7 @@ while is_running:
 
     print("\n{city}, {country}".format(**location_data))
 
-    # The current date we are iterating through
-    current_date = ''
+    grouped_data = defaultdict(list)
 
     # Iterates through the array of dictionaries named list in json_data
     for item in json_data["list"]:
@@ -55,29 +55,24 @@ while is_running:
         time = item["dt_txt"]
 
         # Split the time into date and hour [YYYY-MM-DD 06:00:00]
-        next_date, hour = time.split(' ')
+        date, hour = time.split(' ')
 
         # Stores the current date and prints it once
-        if current_date != next_date:
-            current_date = next_date
-            year, month, day = current_date.split('-')
-            print(f"\n{month}/{day}/{year}")
+        year, month, day = date.split('-')
+        date = f"{month}/{day}/{year}"
 
-        # Grabs the first 2 integers from our HH:MM:SS string to get the hours
+        # Grabs the first 2 characters from our HH:MM:SS string to get the hours
         hour = int(hour[:2])
 
         # Sets the AM (ante meridiem) or PM (post meridiem) period
-        if hour < 12:
-            if hour == 0:
-                hour = 12
-            meridiem = "AM"
-        else:
-            if hour > 12:
-                hour -= 12
-            meridiem = "PM"
+        meridiem = "AM" if hour < 12 else "PM"
+        if hour == 0:
+            hour = 12
+        elif hour > 12:
+            hour -= 12
 
-        # Prints the hours [HH:MM AM/PM]
-        print("\n%i:00 %s" % (hour, meridiem))
+        # Formatted as [HH:MM AM/PM]
+        time = f"{hour}:00 {meridiem}"
 
         # Temperature is measured in Kelvin
         temperature = item["main"]["temp"]
@@ -85,12 +80,16 @@ while is_running:
         # Weather conditions
         description = item["weather"][0]["description"]
         humidity = item["main"]["humidity"]
+        grouped_data[date].append((time, temperature, description, humidity))
 
-        # Prints the description as well as the temperature in Celcius and Fahrenheit
-        print("Weather condition: %s" % description)
-        print(f"Humidity: {humidity}%")
-        print("Celcius: {:.2f}".format(temperature - 273.15))
-        print("Fahrenheit: %.2f" % ((temperature - 273.15) * 9/5 + 32))
+    for date in grouped_data:
+        print("\n" + date)
+        for time, temperature, description, humidity in grouped_data[date]:
+            print("\n" + time)
+            print("Weather condition: %s" % description)
+            print(f"Humidity: {humidity}%")
+            print("Celcius: {:.2f}".format(temperature - 273.15))
+            print("Fahrenheit: %.2f" % ((temperature - 273.15) * 9/5 + 32))
 
     # Prints a calendar of the current month
     calendar_month = calendar.month(int(year), int(month))
