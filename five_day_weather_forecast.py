@@ -12,6 +12,11 @@ if api_key == "<your_api_key>":
     exit()
 
 
+def print_goodbye_messages():
+    print("Thank you for using Jaimes Subroto's 5 day weather forecast application.")
+    print("Have a great day!")
+
+
 def get_city_or_zip_code():
     while True:
         try:
@@ -40,7 +45,13 @@ is_running = True
 while is_running:
 
     # Stores the Json response
-    json_data = requests.get(api_call + get_city_or_zip_code()).json()
+    response = requests.get(api_call + get_city_or_zip_code())
+    json_data = response.json()
+    if response.status_code == 401:
+        print("Got a 401 response.")
+        print(json_data["message"])
+        print_goodbye_messages()
+        exit()
 
     location_data = {
         "city": json_data["city"]["name"],
@@ -105,10 +116,8 @@ while is_running:
             print("Great!")
             break
         elif continue_input.lower() in {"no", 'n', "exit"}:
-            print(
-                "Thank you for using Jaimes Subroto's 5 day weather forecast application.")
-            print("Have a great day!")
             is_running = False
+            print_goodbye_messages()
             break
         else:
             print(invalid_input_message)
