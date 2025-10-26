@@ -18,10 +18,17 @@ Python application which calls the [OpenWeatherMap API](https://openweathermap.o
 1. **Get an API key**  
    Sign up and get an **API KEY**: https://openweathermap.org/api
 
-2. **Create a `.env` file** in the project root:
-   ~~~env
+2. **Set up environment**  
+   Copy the example file and edit your API key:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Then open .env and replace with your key:
+   ```env
    OPENWEATHER_API_KEY=your-api-key-here
-   ~~~
+   ```
 
 3. **Run the app**  
    Using [uv](https://docs.astral.sh/uv):
