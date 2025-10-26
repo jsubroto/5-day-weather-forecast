@@ -3,7 +3,7 @@ name = "5-day-weather-forecast"
 version = "0.1.0"
 description = "Python application which calls the OpenWeatherMap API to get a 5 day weather forecast"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
     "requests>=2.32.4",
 ]
